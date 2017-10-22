@@ -1,5 +1,7 @@
 // Load mongoose package
 var mongoose = require('mongoose');
+var todos = require('./routes/todos');
+app.use('/todos', todos);
 // Connect to MongoDB and create/use database called todoAppTest
 mongoose.connect('mongodb://localhost:27017/todoAppTest');
 // Create a schema
@@ -47,25 +49,3 @@ app.get('/todos/:id', function (req, res, next) {
     res.json(todo);
   });
 });
-/*
-// callback function to avoid duplicating it all over
-var callback = function (err, data) {
-  if (err) { return console.error(err); }
-  else { console.log(data); }
-}
-// Get ONLY completed tasks
-Todo.find({completed: true }, callback);
-// Get all tasks ending with `JS`
-Todo.find({name: /JS$/ }, callback);
-
-
-
-
-var oneYearAgo = new Date();
-oneYearAgo.setYear(oneYearAgo.getFullYear() - 1);
-// Get all tasks staring with `Master`, completed
-Todo.find({name: /^Master/, completed: true }, callback);
-// Get all tasks staring with `Master`, not completed and created from year ago to now...
-Todo.find({name: /^Master/, completed: false }).where('updated_at').gt(oneYearAgo).exec(callback);
-*/
- 
